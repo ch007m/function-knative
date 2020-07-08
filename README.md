@@ -18,15 +18,15 @@
 
 ## Run project locally
 
-- The Spring Boot `Hello` project exposes as a `Function` a `hello()` endpoint that a user can access to get a Welcome message.
-  The input parameter is the name of a `User` which is used to return as output a Greeting message `Welcome, user's name`
+- The Spring Boot `Hello` project exposes a `Function` an endpoint that a user can access to get a response. The url to access the endpoint
+  is defined using the name of the function. In our example, the function `hello()` will then become accessible using the following url `/hello`.
+  The input parameter is the name of the `User` which is used to return as output a `Greeting` message `Welcome, user's name`.
 ```java
 	@Bean
 	public Function<User, Greeting> hello() {
 		return user -> new Greeting("Welcome, " + user.getName());
 	}
 ```
-
 - Build and run the project locally
 ```bash
 cd hello
@@ -43,7 +43,7 @@ charles
     "message": "Welcome, charles\n"
 }
 ```
-- You can pass the name of User pojo as `json POST`
+- You can pass the name of the `User` pojo using a HTTP `POST`request and where the input parameter is defined as a `json` string
 ```bash
 echo '{"name": "Sylvie"}' | http -s solarized POST :8080/hello
 ```
