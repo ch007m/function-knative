@@ -14,6 +14,7 @@
 * [kind](https://kind.sigs.k8s.io/) - to run your local Kubernetes cluster
 * Java 11
 * Maven 3.6.3+
+* [Httpie](http://httpie.org/)
 
 ## Run project locally
 
