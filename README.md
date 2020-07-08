@@ -18,6 +18,15 @@
 
 ## Run project locally
 
+- The Spring Boot `Hello` project exposes as a `Function` a `hello()` endpoint that a user can access to get a Welcome message.
+  The input parameter is the name of a `User` which is used to return as output a message `Welcome, user's name`
+```java
+	@Bean
+	public Function<User, Greeting> hello() {
+		return user -> new Greeting("Welcome, " + user.getName());
+	}
+```
+
 - Build and run the project locally
 ```bash
 cd hello
