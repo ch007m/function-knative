@@ -6,11 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class HelloFunctionTests {
+class ApplicationTests {
 	@Test
 	public void test() {
-		Greeting result = new HelloFunction().hello().apply(new User("foo"));
+		Greeting result = new Application().hello().apply(new User("foo"));
 		assertThat(result.getMessage()).isEqualTo("Welcome, foo");
 	}
-
 }

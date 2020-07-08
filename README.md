@@ -24,11 +24,13 @@ cd hello
 mvn spring-boot:run
 ```
 - Access it using `httpie tool`
-```
-http -s solarized POST :8080/hello name=charles
+```bash
+cat | http -s solarized POST :8080/hello Content-Type:text/plain
+charles
+^D
 HTTP/1.1 200 
 Content-Type: application/json
-Date: Wed, 08 Jul 2020 09:24:28 GMT
+Date: Wed, 08 Jul 2020 16:11:30 GMT
 Keep-Alive: timeout=60
 Transfer-Encoding: chunked
 accept-encoding: gzip, deflate
@@ -36,7 +38,7 @@ connection: keep-alive, keep-alive
 user-agent: HTTPie/2.2.0
 
 {
-    "message": "Welcome, charles"
+    "message": "Welcome, charles\n"
 }
 ```
 ## Build and deploy on k8s
