@@ -1,4 +1,4 @@
-# function-knative
+# Function & knative
 
 ## Table of Contents
 
@@ -58,7 +58,7 @@ mvn compile jib:dockerBuild \
 ```bash
 docker push $IMAGE
 ```
-- Deploy it on k8s cluster
+- Deploy it on a k8s cluster and forward the port in order to access the application
 ```bash
 kubectl create ns demo
 kubectl run spring-boot-function --image=$IMAGE --port=8080 --restart=Never -n demo
@@ -68,23 +68,17 @@ kubectl port-forward spring-boot-function 8080 -n demo
 ```
 - Access the service
 ```bash
-http -s solarized POST :8080 name=sylvie 
-HTTP/1.1 200 
-Content-Type: application/json
-Date: Wed, 08 Jul 2020 09:56:28 GMT
-Keep-Alive: timeout=60
-Transfer-Encoding: chunked
-accept-encoding: gzip, deflate
-connection: keep-alive, keep-alive
-user-agent: HTTPie/2.2.0
-
+cat | http -s solarized POST :8080/hello Content-Type:text/plain
+Sylvie
+^D
+...
 {
     "message": "Welcome, sylvie"
 }
 ```
 ## Knative way
 
-- Deploy the KNative service
+- To play with the `Function` on a Knative k8 cluster, it is needed that knative is [installed](#create-a-kind-cluster-for-knative). Next, you can install the Knative service
 ```bash
 kubectl create ns demo-knative
 kubectl apply -f resources/sb-kn-serving.yml -n demo-knative
@@ -93,20 +87,7 @@ kubectl apply -f resources/sb-kn-serving.yml -n demo-knative
 ```bash
 SVC_URL=$(kubectl get ksvc greeter -n demo-knative -ojsonpath="{.status.url}")
 http -s solarized POST $SVC_URL/hello name=sylvie 
-HTTP/1.1 200 OK
-accept-encoding: gzip, deflate
-content-type: application/json
-date: Wed, 08 Jul 2020 14:46:48 GMT
-forwarded: for=10.244.0.9;proto=http
-k-proxy-request: activator
-server: envoy
-transfer-encoding: chunked
-user-agent: HTTPie/2.2.0
-x-envoy-expected-rq-timeout-ms: 600000
-x-envoy-upstream-service-time: 85
-x-forwarded-proto: http
-x-request-id: c04c5746-374c-4b6a-98ee-57e01ed37649
-
+...
 {
     "message": "Welcome, sylvie"
 }
