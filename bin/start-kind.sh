@@ -74,19 +74,18 @@ kubectl rollout status deploy ingress-nginx-nginx-ingress-default-backend -n ing
 ######################################
 
 kubectl apply --selector knative.dev/crd-install=true \
-  --filename https://github.com/knative/serving/releases/download/v0.14.0/serving-crds.yaml \
-  --filename https://github.com/knative/eventing/releases/download/v0.14.0/eventing.yaml
+  --filename https://github.com/knative/serving/releases/download/v0.15.0/serving-crds.yaml
 
 kubectl apply \
   --filename \
-  https://github.com/knative/serving/releases/download/v0.14.0/serving-core.yaml
+  https://github.com/knative/serving/releases/download/v0.16.0/serving-core.yaml
 
 kubectl rollout status deploy controller -n knative-serving
 kubectl rollout status deploy activator -n knative-serving
 
 kubectl apply \
   --filename \
-    https://github.com/knative/net-kourier/releases/download/v0.14.0/kourier.yaml
+    https://github.com/knative/net-kourier/releases/download/v0.15.0/kourier.yaml
 
 kubectl rollout status deploy 3scale-kourier-control -n kourier-system
 kubectl rollout status deploy 3scale-kourier-gateway -n kourier-system
@@ -95,6 +94,9 @@ kubectl patch configmap/config-network \
   -n knative-serving \
   --type merge \
   -p '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
+
+# TODO: Check using doc : https://knative.dev/docs/install/any-kubernetes-cluster/
+# kubectl apply --filename https://github.com/knative/serving/releases/download/v0.15.0/serving-default-domain.yaml
 
 cat <<EOF | kubectl apply -n kourier-system -f -
 apiVersion: networking.k8s.io/v1beta1
