@@ -1,5 +1,13 @@
 # function-knative
 
+## Table of Contents
+
+  * [Pre-requisites](#pre-requisites)
+  * [Run project locally](#run-project-locally)
+  * [Create a kind cluster for knative](#create-a-kind-cluster-for-knative)
+  * [Build and deploy on k8s](#build-and-deploy-on-k8s)
+  * [Knative way](#knative-way)
+
 ## Pre-requisites
 
 * [Docker for Mac or Windows](https://www.docker.com/products/docker-desktop)
@@ -82,6 +90,24 @@ kubectl apply -f resources/sb-kn-serving.yml -n demo-knative
 - Access it
 ```bash
 SVC_URL=$(kubectl get ksvc greeter -n demo-knative -ojsonpath="{.status.url}")
+http -s solarized POST $SVC_URL name=sylvie 
+HTTP/1.1 200 OK
+accept-encoding: gzip, deflate
+content-type: application/json
+date: Wed, 08 Jul 2020 14:46:48 GMT
+forwarded: for=10.244.0.9;proto=http
+k-proxy-request: activator
+server: envoy
+transfer-encoding: chunked
+user-agent: HTTPie/2.2.0
+x-envoy-expected-rq-timeout-ms: 600000
+x-envoy-upstream-service-time: 85
+x-forwarded-proto: http
+x-request-id: c04c5746-374c-4b6a-98ee-57e01ed37649
+
+{
+    "message": "Welcome, sylvie"
+}
 
 ```
 
@@ -214,12 +240,4 @@ Hello Hello Knative Serving is up and running with Kourier!!!
 - You can stop your cluster and remove all the resources you’ve created by entering the command:
 ```bash
 kind delete cluster --name knative
-```
-
-## Launch K8s cluster using kind tool
-
-**IMPORTANT**: Currently the application is tested only with local clusters.
-
-```bash
-$PROJECT_HOME/bin/start-kind.sh
 ```
