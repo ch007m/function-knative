@@ -86,7 +86,7 @@ Sylvie
 ```bash
 kind delete clusters k8s
 ```
-## Knative way
+## Knative Serving way
 
 - To play with the `Function` on a Knative k8 cluster, it is needed that knative is [installed](#create-a-kind-cluster-for-knative). Next, you can deploy the Knative service using the following yaml resource.
 ```bash
