@@ -101,7 +101,7 @@ kubectl apply --filename https://github.com/knative/serving/releases/download/v0
 ```bash
 kubectl apply --filename https://github.com/knative/serving/releases/download/v0.15.0/serving-core.yaml
 ```
-- Next, choose a networking layer such as `Kourier` which is the option with the lowest resource requirements, and connects to Envoy and the Knative Ingress CRDs directly.
+- Next, choose a networking layer such as `Kourier` which is the option with the lowest resource requirements, and connects to `Envoy` & `Knative Ingress` CRDs directly.
 ```bash
 curl -Lo kourier.yaml https://github.com/knative/net-kourier/releases/download/v0.15.0/kourier.yaml
 ```
