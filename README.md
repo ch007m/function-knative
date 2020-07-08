@@ -2,8 +2,8 @@
 
 ## Pre-requisites
 
-* https://www.docker.com/products/docker-desktop[Docker for Mac or Windows]
-* https://kind.sigs.k8s.io/[kind] - to run your local Kubernetes cluster
+* [Docker for Mac or Windows](https://www.docker.com/products/docker-desktop)
+* [kind](https://kind.sigs.k8s.io/) - to run your local Kubernetes cluster
 * Java 11
 * Maven 3.6.3+
 
