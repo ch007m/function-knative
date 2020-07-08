@@ -25,7 +25,7 @@ public class Application {
 	public Function<String, String> translate() {
 		return input -> {
 			final String fromLang = "en";
-			final String toLang = "es";
+			final String toLang = "fr";
 			final String url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + fromLang + "&tl="
 					+ toLang + "&dt=t&q=" + input;
 

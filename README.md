@@ -47,6 +47,20 @@ charles
 ```bash
 echo '{"name": "Sylvie"}' | http -s solarized POST :8080/hello
 ```
+- Another service is also packged within the Spring Boot application and allows to translate from English to French your input string
+```bash
+echo "How are you ?" | http -s solarized POST :8080/translate
+HTTP/1.1 200 
+Content-Length: 20
+Content-Type: application/json
+Date: Wed, 08 Jul 2020 18:22:21 GMT
+Keep-Alive: timeout=60
+accept-encoding: gzip, deflate
+connection: keep-alive, keep-alive
+user-agent: HTTPie/2.2.0
+
+Comment allez-vous ?
+```
 
 ## Build and deploy on k8s
 
