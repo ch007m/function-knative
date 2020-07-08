@@ -199,6 +199,18 @@ kubectl apply -f resources/service.yaml -n demo
 ```bash
 kubectl get ksvc -n demo
 ```
+- Test the service
+```bash
+http http://helloworld-go.demo.127.0.0.1.nip.io/                      
+HTTP/1.1 200 OK
+content-length: 62
+content-type: text/plain; charset=utf-8
+date: Wed, 08 Jul 2020 14:37:00 GMT
+server: envoy
+x-envoy-upstream-service-time: 1159
+
+Hello Hello Knative Serving is up and running with Kourier!!!
+```
 - You can stop your cluster and remove all the resources you’ve created by entering the command:
 ```bash
 kind delete cluster --name knative
