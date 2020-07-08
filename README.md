@@ -4,9 +4,9 @@
 
   * [Pre-requisites](#pre-requisites)
   * [Run project locally](#run-project-locally)
-  * [Create a kind cluster for knative](#create-a-kind-cluster-for-knative)
   * [Build and deploy on k8s](#build-and-deploy-on-k8s)
   * [Knative way](#knative-way)
+  * [Create a kind cluster for knative](#create-a-kind-cluster-for-knative)
 
 ## Pre-requisites
 
@@ -58,7 +58,11 @@ mvn compile jib:dockerBuild \
 ```bash
 docker push $IMAGE
 ```
-- Deploy it on a k8s cluster and forward the port in order to access the application
+- Launch a k8s cluster locally
+```bash
+kind create cluster --name k8s
+```
+- Create a pod/service using the Spring Boot JIB image built. Next, forward the port in order to access the application
 ```bash
 kubectl create ns demo
 kubectl run spring-boot-function --image=$IMAGE --port=8080 --restart=Never -n demo
@@ -76,14 +80,18 @@ Sylvie
     "message": "Welcome, sylvie"
 }
 ```
+- Delete the kind cluster
+```bash
+kind delete clusters k8s
+```
 ## Knative way
 
-- To play with the `Function` on a Knative k8 cluster, it is needed that knative is [installed](#create-a-kind-cluster-for-knative). Next, you can install the Knative service
+- To play with the `Function` on a Knative k8 cluster, it is needed that knative is [installed](#create-a-kind-cluster-for-knative). Next, you can deploy the Knative service using the following yaml resource.
 ```bash
 kubectl create ns demo-knative
 kubectl apply -f resources/sb-kn-serving.yml -n demo-knative
 ```
-- Access it
+- Access the service using the Service URL
 ```bash
 SVC_URL=$(kubectl get ksvc greeter -n demo-knative -ojsonpath="{.status.url}")
 http -s solarized POST $SVC_URL/hello name=sylvie 
@@ -91,7 +99,6 @@ http -s solarized POST $SVC_URL/hello name=sylvie
 {
     "message": "Welcome, sylvie"
 }
-
 ```
 
 ## Create a kind cluster for knative
