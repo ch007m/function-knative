@@ -25,7 +25,7 @@ mvn spring-boot:run
 ```
 - Access it using `httpie tool`
 ```
-http -s solarized POST :8080 name=charles
+http -s solarized POST :8080/hello name=charles
 HTTP/1.1 200 
 Content-Type: application/json
 Date: Wed, 08 Jul 2020 09:24:28 GMT
@@ -90,7 +90,7 @@ kubectl apply -f resources/sb-kn-serving.yml -n demo-knative
 - Access it
 ```bash
 SVC_URL=$(kubectl get ksvc greeter -n demo-knative -ojsonpath="{.status.url}")
-http -s solarized POST $SVC_URL name=sylvie 
+http -s solarized POST $SVC_URL/hello name=sylvie 
 HTTP/1.1 200 OK
 accept-encoding: gzip, deflate
 content-type: application/json
