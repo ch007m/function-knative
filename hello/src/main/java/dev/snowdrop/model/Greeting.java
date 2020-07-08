@@ -2,14 +2,13 @@ package dev.snowdrop.model;
 
 public class Greeting {
 
-    public Greeting() {
-    }
+    private String message;
+
+    public Greeting() {}
 
     public Greeting(String message) {
         this.message = message;
     }
-
-    private String message;
 
     public String getMessage() {
         return message;

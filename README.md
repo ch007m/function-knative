@@ -19,7 +19,7 @@
 ## Run project locally
 
 - The Spring Boot `Hello` project exposes as a `Function` a `hello()` endpoint that a user can access to get a Welcome message.
-  The input parameter is the name of a `User` which is used to return as output a message `Welcome, user's name`
+  The input parameter is the name of a `User` which is used to return as output a Greeting message `Welcome, user's name`
 ```java
 	@Bean
 	public Function<User, Greeting> hello() {
@@ -43,6 +43,11 @@ charles
     "message": "Welcome, charles\n"
 }
 ```
+- You can pass the name of User pojo as `json POST`
+```bash
+echo '{"name": "Sylvie"}' | http -s solarized POST :8080/hello
+```
+
 ## Build and deploy on k8s
 
 - Build the container image using [JIB maven plugin](https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin#configuration)
