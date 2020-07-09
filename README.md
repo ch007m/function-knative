@@ -18,7 +18,7 @@
 
 ## Run project locally
 
-- The Spring Boot `Hello` project exposes a `Function` an endpoint that a user can access to get a response. The url to access the endpoint
+- The Spring Boot `Hello` project exposes a `Function` as an endpoint that a user can access to get a response. The url to access the endpoint
   is defined using the name of the function. In our example, the function `hello()` will then become accessible using the following url `/hello`.
   The input parameter is the name of the `User` which is used to return as output a `Greeting` message `Welcome, user's name`.
 ```java
